@@ -1,13 +1,14 @@
 import { FormEvent, useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { InviteGuestsModal } from './components/modals/InviteGuestsModal'
 import { TripConfirmationModal } from './components/modals/TripConfirmationModal'
 import { DestinationAndDateStep } from './components/steps/DestinationAndDateStep'
 import { InviteGuestsStep } from './components/steps/InviteGuestsStep'
 import { DateRange } from 'react-day-picker'
+// import { api } from '../../lib/axios'
 
 export function Home() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false)
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
@@ -65,14 +66,45 @@ export function Home() {
   function closeTripConfirmatioModal() {
     setIsTripConfirmationModalOpen(false)
   }
-  function createTrip(event: FormEvent<HTMLFormElement>) {
+  async function createTrip(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    // navigate('/trip/123')
+
     console.log(destination)
     console.log(emailsToInvite)
     console.log(travelStartAndEndDates)
     console.log(ownerName)
     console.log(ownerEmail)
+
+    // if (!destination) {
+    //   return
+    // }
+
+    // if (!travelStartAndEndDates?.from || !travelStartAndEndDates?.to) {
+    //   return
+    // }
+
+    // if (!ownerName || !ownerEmail) {
+    //   return
+    // }
+
+    // if (emailsToInvite.length === 0) {
+    //   return
+    // }
+
+    // const response = await api.post('/trips', {
+    //   destination,
+    //   starts_at: travelStartAndEndDates.from,
+    //   ends_at: travelStartAndEndDates.to,
+    //   emails_to_invite: emailsToInvite,
+    //   owner_name: ownerName,
+    //   owner_email: ownerEmail,
+    // })
+
+    // const { tripId } = response.data
+    // console.log(tripId)
+
+    // navigate(`/trip/{tripId}`)
+    navigate('/trip/123')
   }
 
   return (
