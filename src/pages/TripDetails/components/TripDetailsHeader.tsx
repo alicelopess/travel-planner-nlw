@@ -1,5 +1,5 @@
 import { Calendar, MapPin, Settings2 } from 'lucide-react'
-import { Button } from '../../../components/Button'
+import { Button } from '../../../components/buttons/Button'
 
 export function TripDetailsHeader() {
   return (

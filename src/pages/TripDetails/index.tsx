@@ -6,7 +6,7 @@ import { GuestsList } from './components/GuestsList'
 import { ActivityList } from './components/ActivityList'
 import { TripDetailsHeader } from './components/TripDetailsHeader'
 import { CreateImportantLinkModal } from './components/modals/CreateImportantLinkModal'
-import { Button } from '../../components/Button'
+import { Button } from '../../components/buttons/Button'
 
 export function TripDetails() {
   const [isCreateActivityModalOpen, setIsCreateActivityModalOpen] =

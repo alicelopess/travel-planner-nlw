@@ -1,5 +1,5 @@
 import { ArrowRight, UserRoundPlus } from 'lucide-react'
-import { Button } from '../../../../components/Button'
+import { Button } from '../../../../components/buttons/Button'
 
 interface InviteGuestsProps {
   invites: string[]

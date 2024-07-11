@@ -1,6 +1,8 @@
 import { Mail, User, X } from 'lucide-react'
 import { FormEvent } from 'react'
-import { Button } from '../../../../components/Button'
+import { Button } from '../../../../components/buttons/Button'
+import { InputWrapper } from '../../../../components/inputs/InputWrapper'
+import { Input } from '../../../../components/inputs/Input'
 
 interface TripConfirmationModalProps {
   createTrip: (event: FormEvent<HTMLFormElement>) => void
@@ -37,24 +39,15 @@ export function TripConfirmationModal({
         </div>
 
         <form onSubmit={createTrip} className="space-y-3">
-          <div className="h-14 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
-            <User className="" />
-            <input
-              type="text"
-              name="name"
-              className="bg-transparent placeholder-zinc-400 text-lg w-40 outline-none flex-1"
-              placeholder="Seu nome completo"
-            />
-          </div>
-          <div className="h-14 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">
-            <Mail className="" />
-            <input
-              type="email"
-              name="email"
-              className="bg-transparent placeholder-zinc-400 text-lg w-40 outline-none flex-1"
-              placeholder="Seu e-mail pessoal"
-            />
-          </div>
+          <InputWrapper>
+            <User className="text-zinc-400 size-5" />
+            <Input type="text" name="name" placeholder="Seu nome completo" />
+          </InputWrapper>
+
+          <InputWrapper>
+            <Mail className="text-zinc-400 size-5" />
+            <Input type="email" name="email" placeholder="Seu e-mail pessoal" />
+          </InputWrapper>
           <Button size="full">Confirmar criação da viagem</Button>
         </form>
       </div>

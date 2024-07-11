@@ -1,5 +1,5 @@
 import { CircleDashed, UserCog } from 'lucide-react'
-import { Button } from '../../../components/Button'
+import { Button } from '../../../components/buttons/Button'
 
 export function GuestsList() {
   return (
