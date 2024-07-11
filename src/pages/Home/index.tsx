@@ -1,21 +1,28 @@
 import { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { InviteGuestsModal } from './components/modals/InviteGuestsModal'
 import { TripConfirmationModal } from './components/modals/TripConfirmationModal'
 import { DestinationAndDateStep } from './components/steps/DestinationAndDateStep'
 import { InviteGuestsStep } from './components/steps/InviteGuestsStep'
+import { DateRange } from 'react-day-picker'
 
 export function Home() {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false)
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
   const [emailsToInvite, setEmailsToInvite] = useState([
     'diego@rocketseat.com.br',
   ])
-
   const [isTripConfirmationModalOpen, setIsTripConfirmationModalOpen] =
     useState(false)
+
+  const [destination, setDestination] = useState('')
+  const [ownerName, setOwnerName] = useState('')
+  const [ownerEmail, setOwnerEmail] = useState('')
+  const [travelStartAndEndDates, setTravelStartAndEndDates] = useState<
+    DateRange | undefined
+  >()
 
   function openGuestsInput() {
     setIsGuestsInputOpen(true)
@@ -60,7 +67,12 @@ export function Home() {
   }
   function createTrip(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    navigate('/trip/123')
+    // navigate('/trip/123')
+    console.log(destination)
+    console.log(emailsToInvite)
+    console.log(travelStartAndEndDates)
+    console.log(ownerName)
+    console.log(ownerEmail)
   }
 
   return (
@@ -78,6 +90,9 @@ export function Home() {
             closeGuestsInput={closeGuestsInput}
             isGuestsInputOpen={isGuestsInputOpen}
             openGuestsInput={openGuestsInput}
+            setDestination={setDestination}
+            setTravelStartAndEndDates={setTravelStartAndEndDates}
+            travelStartAndEndDates={travelStartAndEndDates}
           />
 
           {isGuestsInputOpen && (
@@ -116,6 +131,8 @@ export function Home() {
         <TripConfirmationModal
           closeTripConfirmatioModal={closeTripConfirmatioModal}
           createTrip={createTrip}
+          setOwnerName={setOwnerName}
+          setOwnerEmail={setOwnerEmail}
         />
       )}
     </div>
