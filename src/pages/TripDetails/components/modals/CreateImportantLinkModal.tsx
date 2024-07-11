@@ -1,4 +1,5 @@
 import { Link2, Tag, X } from 'lucide-react'
+import { Button } from '../../../../components/Button'
 
 interface CreateImportantLinkModalProps {
   closeCreateImportantLinkModal: () => void
@@ -42,12 +43,7 @@ export function CreateImportantLinkModal({
             />
           </div>
 
-          <button
-            type="submit"
-            className="w-full justify-center bg-lime-300 text-lime-950 rounded-lg px-5 h-11 font-medium flex items-center gap-2 hover:bg-lime-400"
-          >
-            Salvar link
-          </button>
+          <Button size="full">Salvar link</Button>
         </form>
       </div>
     </div>
