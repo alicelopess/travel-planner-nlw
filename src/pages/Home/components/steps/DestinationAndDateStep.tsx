@@ -87,8 +87,6 @@ export function DestinationAndDateStep({
               </div>
             </div>
 
-            <h1>Hello World!</h1>
-
             <MyDatePicker />
           </div>
         </div>

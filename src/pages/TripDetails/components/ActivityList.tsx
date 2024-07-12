@@ -1,28 +1,34 @@
-// import { format } from 'date-fns'
-// import { ptBR } from 'date-fns/locale'
-import { CircleCheck } from 'lucide-react'
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
-// interface Activity {
-//   date: string
-//   activities: {
-//     id: string
-//     title: string
-//     occurs_at: string
-//   }[]
-// }
+import { CircleCheck } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { api } from '../../../lib/axios'
+
+interface Activity {
+  date: string
+  activities: {
+    id: string
+    title: string
+    occurs_at: string
+  }[]
+}
 
 export function ActivityList() {
-  // const { tripId } = useParams()
-  // const [activities, setActivities] = useState<Activity[]>([])
+  const { tripId } = useParams()
+  const [activities, setActivities] = useState<Activity[]>([])
 
-  // useEffect(() => {
-  //   api.get(`/trips/${tripId}/activities`).then((response) => setTrip(response.data.activities))
-  // }, [tripId])
+  useEffect(() => {
+    api
+      .get(`/trips/${tripId}/activities`)
+      .then((response) => setActivities(response.data.activities))
+  }, [tripId])
 
   return (
     <div className="space-y-8">
-      {/* {activities.map((category) => (
-        <div key={category.activities.id} className="space-y-2.5">
+      {activities.map((category) => (
+        <div key={category.date} className="space-y-2.5">
           <div className="flex gap-2 items-baseline">
             <span className="text-xl text-zinc-300 font-semibold">
               Dia {format(category.date, 'd')}
@@ -33,7 +39,7 @@ export function ActivityList() {
           </div>
 
           {category.activities.length > 0 ? (
-            <div>
+            <>
               {category.activities.map((item) => (
                 <div key={item.id} className="space-y-2.5">
                   <div className="px-4 py-2.5 bg-zinc-900 rounded-xl shadow-shape flex items-center gap-3">
@@ -45,16 +51,16 @@ export function ActivityList() {
                   </div>
                 </div>
               ))}
-            </div>
+            </>
           ) : (
             <p className="text-zinc-500 text-sm">
               Nenhuma atividade cadastrada nessa data.
             </p>
           )}
         </div>
-      ))} */}
+      ))}
 
-      <div className="space-y-2.5">
+      {/* <div className="space-y-2.5">
         <div className="flex gap-2 items-baseline">
           <span className="text-xl text-zinc-300 font-semibold">Dia 17</span>
           <span className="text-xs text-zinc-500">Sábado</span>
@@ -86,7 +92,7 @@ export function ActivityList() {
             <span className="text-zinc-400 text-sm ml-auto">08:00h</span>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

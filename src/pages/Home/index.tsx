@@ -5,16 +5,15 @@ import { TripConfirmationModal } from './components/modals/TripConfirmationModal
 import { DestinationAndDateStep } from './components/steps/DestinationAndDateStep'
 import { InviteGuestsStep } from './components/steps/InviteGuestsStep'
 import { DateRange } from 'react-day-picker'
-// import { api } from '../../lib/axios'
+
+import { api } from '../../lib/axios'
 
 export function Home() {
   const navigate = useNavigate()
 
   const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false)
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
-  const [emailsToInvite, setEmailsToInvite] = useState([
-    'diego@rocketseat.com.br',
-  ])
+  const [emailsToInvite, setEmailsToInvite] = useState<string[]>([])
   const [isTripConfirmationModalOpen, setIsTripConfirmationModalOpen] =
     useState(false)
 
@@ -75,36 +74,37 @@ export function Home() {
     console.log(ownerName)
     console.log(ownerEmail)
 
-    // if (!destination) {
-    //   return
-    // }
+    if (!destination) {
+      return
+    }
 
-    // if (!travelStartAndEndDates?.from || !travelStartAndEndDates?.to) {
-    //   return
-    // }
+    if (!travelStartAndEndDates?.from || !travelStartAndEndDates?.to) {
+      return
+    }
 
-    // if (!ownerName || !ownerEmail) {
-    //   return
-    // }
+    if (!ownerName || !ownerEmail) {
+      return
+    }
 
-    // if (emailsToInvite.length === 0) {
-    //   return
-    // }
+    if (emailsToInvite.length === 0) {
+      return
+    }
 
-    // const response = await api.post('/trips', {
-    //   destination,
-    //   starts_at: travelStartAndEndDates.from,
-    //   ends_at: travelStartAndEndDates.to,
-    //   emails_to_invite: emailsToInvite,
-    //   owner_name: ownerName,
-    //   owner_email: ownerEmail,
-    // })
+    const response = await api.post('/trips', {
+      destination,
+      starts_at: travelStartAndEndDates.from,
+      ends_at: travelStartAndEndDates.to,
+      emails_to_invite: emailsToInvite,
+      owner_name: ownerName,
+      owner_email: ownerEmail,
+    })
 
-    // const { tripId } = response.data
-    // console.log(tripId)
+    const { tripId } = response.data
+    console.log(tripId)
 
-    // navigate(`/trip/{tripId}`)
-    navigate('/trip/123')
+    navigate(`/trip/${tripId}`)
+
+    // navigate('/trip/123')
   }
 
   return (
@@ -165,6 +165,8 @@ export function Home() {
           createTrip={createTrip}
           setOwnerName={setOwnerName}
           setOwnerEmail={setOwnerEmail}
+          destination={destination}
+          tripDateRange={travelStartAndEndDates}
         />
       )}
     </div>

@@ -1,27 +1,32 @@
-import { CircleDashed, UserCog } from 'lucide-react'
+import { CheckCircle2, CircleDashed, UserCog } from 'lucide-react'
 import { Button } from '../../../components/buttons/Button'
+import { useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { api } from '../../../lib/axios'
 
-// interface Participant {
-//   id: string
-//   name: string | null
-//   email: string
-//   is_confirmed: boolean
-// }
+interface Participant {
+  id: string
+  name: string | null
+  email: string
+  is_confirmed: boolean
+}
 
 export function GuestsList() {
-  // const { tripId } = useParams()
-  // const [participants, setParticipants] = useState<Participant[]>([])
+  const { tripId } = useParams()
+  const [participants, setParticipants] = useState<Participant[]>([])
 
-  // useEffect(() => {
-  //   api.get(`/trips/${tripId}/participants`).then((response) => setTrip(response.data.participants))
-  // }, [tripId])
+  useEffect(() => {
+    api
+      .get(`/trips/${tripId}/participants`)
+      .then((response) => setParticipants(response.data.participants))
+  }, [tripId])
 
   return (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold">Convidados</h2>
 
       <div className="space-y-5">
-        <div className="flex items-center justify-between gap-4">
+        {/* <div className="flex items-center justify-between gap-4">
           <div className="space-y-1.5 flex-1">
             <span className="block font-medium text-zinc-100">Alice</span>
             <span className="block text-sm text-zinc-400 truncate ">
@@ -39,9 +44,9 @@ export function GuestsList() {
             </span>
           </div>
           <CircleDashed className="text-zinc-400 size-5" />
-        </div>
+        </div> */}
 
-        {/* {participants.map((participant, index) => (
+        {participants.map((participant, index) => (
           <div
             key={participant.id}
             className="flex items-center justify-between gap-4"
@@ -60,7 +65,7 @@ export function GuestsList() {
               <CircleDashed className="text-zinc-400 size-5 shrink-0" />
             )}
           </div>
-        ))} */}
+        ))}
       </div>
 
       <Button variant="secondary" size="full">
